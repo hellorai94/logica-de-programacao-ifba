@@ -10,10 +10,9 @@ int main(void) {
     printf("Digite um número inteiro: \n");
     scanf("%d", &num);
 
-    while (num > 0) {
-        soma += num % 10;
-        num = num / 10;
-    }
+   for (int i = 0; i <= num; i++) {
+        soma += i;
+   }
 
     printf("%d\n", soma);
     return 0;

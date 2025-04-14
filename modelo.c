@@ -1,18 +1,25 @@
 #include <stdio.h>
 
 int main(void) {
-    int num1, num2;
+    int valorSaque;
 
-    printf("Digite o 1º número: ");
-    scanf("%d", &num1);
-    printf("Digite o 2º número: ");
-    scanf("%d", &num2);
+    printf("Quanto você quer sacar? ");
+    scanf("%d", &valorSaque);
 
-    if (num1 > num2) {
-        printf("%d é maior que %d", num1, num2);
-    } else if (num2 > num1) {
-        printf("%d é maior que %d", num2, num1);
-    } else {
-        printf("%d é igual a %d", num2, num1);
-    }
+    int qnt100 = valorSaque / 100;
+    valorSaque = valorSaque % 100;
+
+    int qnt50 = valorSaque / 50;
+    valorSaque = valorSaque % 50;
+
+    int qnt20 = valorSaque / 20;
+    valorSaque = valorSaque % 100;
+
+    int qnt10 = valorSaque / 10;
+    valorSaque = valorSaque % 10;
+
+    int qnt5 = valorSaque / 5;
+    valorSaque = valorSaque % 5;
+
+    printf("O valor de cada nota a ser sacado é:\n R$ 100: %d nota(s).\nR$ 50: %d nota(s).\nR$ 20: %d nota(s).\nR$ 10: %d nota(s).\nR$ 5: %d nota(s).\n", qnt100, qnt50, qnt20, qnt10, qnt5);
 }

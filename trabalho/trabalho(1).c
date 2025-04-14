@@ -13,12 +13,14 @@ typedef struct {
 Aluno alunos[MAXIMO_ALUNOS];
 int totalAlunos = 0;
 
+// função que confere se ainda pode cadastrar alunos, se o id já tá cadastrado e também realiza o cadastro de novos alunos
 int cadastrarAluno () {
     if (totalAlunos >= MAXIMO_ALUNOS) {
         printf("Quantidade máxima de alunos cadastrados já preenhecida.");
         return 0;
     };
     
+    // verifica se já existe aluno com o ID
     printf("Digite o ID do aluno: ");
     scanf("%d", &alunos[totalAlunos].id);
         for (int i = 0; i < totalAlunos; i++) {
@@ -28,36 +30,51 @@ int cadastrarAluno () {
         }
     };
 
+    // cadastra o aluno e intera
     printf("Digite o nome do aluno: ");
     scanf("%39s", alunos[totalAlunos].nome);
-    printf("Digite a nota do aluno: ");  // Retirei o "\n"
+    printf("Digite a nota do aluno: ");  
     scanf("%f", &alunos[totalAlunos].nota);
     totalAlunos++;
     return 1;  
 };
 
 
-Aluno mostrarAluno(int id)  {
+void mostrarAluno(int id) {
     Aluno semAluno = {0};
+    int encontrado = 0;
+
+    // procura o aluno pelo id, se encontrado, mostra, caso não, avisa que não encontrou
     for (int i = 0; i < totalAlunos; i++) {
         if (alunos[i].id == id) {
-        return alunos[i];
-        };
-    };
-    return semAluno;
-};
+            printf("=======================================\n");
+            printf("\nAluno encontrado: \n"); 
+            printf("ID: %d\n", alunos[i].id);
+            printf("Nome: %s\n", alunos[i].nome);
+            printf("Nota: %.2f\n", alunos[i].nota);
+            encontrado = 1;
+            break;
+        }
+    }
 
+    if (!encontrado) {
+        printf("=======================================\n");
+        printf("Aluno não encontrado.\n");
+    }
+}
+
+// 
 Aluno editarAluno(int id) {
     Aluno semAluno = {0};
     for (int i = 0; i < totalAlunos; i++) {
         if(alunos[i].id == id){
-            printf("======================\n");
+            printf("=======================================\n");
             printf("Aluno encontrado\n");
-            printf("Novo Nome do aluno: ");
+            printf("Novo nome do aluno: ");
             scanf("%39s", alunos[i].nome);
-            printf("Nova Nota do aluno: ");
+            printf("Nova nota do aluno: ");
             scanf("%f", &alunos[i].nota);
-            printf("Aluno editado\n");
+            printf("Aluno editado.\n");
             
             return alunos[i];
         }
@@ -67,7 +84,7 @@ Aluno editarAluno(int id) {
 
 
 Aluno mostrarTodos() {
-    printf("=====LISTA DE TODOS OS ALUNOS=======\n");
+    printf("=====Lista de todos os Alunos=======\n");
     for (int i = 0; i < totalAlunos; i++) {
         printf("\nAluno %d:\n", i + 1);
         printf("ID: %d\n", alunos[i].id);
@@ -77,7 +94,7 @@ Aluno mostrarTodos() {
 };
 
 Aluno verEstatisticas() {
-    printf("=======Estatisticas=======\n");
+    printf("============Estatísticas============\n");
     float comparaMaior = 0, comparaMenor = 10, somaNotas = 0;
       for (int i = 0; i < totalAlunos; i++){
           if(alunos[i].nota > comparaMaior){
@@ -118,17 +135,7 @@ int main(void) {
             case 2: 
                 printf("Digite o id do aluno: ");
                 scanf("%d", &idPesquisar);
-                Aluno aluno = mostrarAluno(idPesquisar);
-                if (aluno.id != 0 ) {
-                    printf("=======================================\n");
-                    printf("\nAluno encontrado: \n"); // Adicionei um "\n" no inicio
-                    printf("ID: %d\n", aluno.id);
-                    printf("Nome: %s\n", aluno.nome);
-                    printf("Nota: %.2f\n", aluno.nota);
-                } else {
-                    printf("=======================================\n");
-                    printf("Aluno não encontrado.\n");
-                };
+                mostrarAluno(idPesquisar);
                 break;
             case 3: 
                 printf("Digite o id do aluno: ");
@@ -136,7 +143,7 @@ int main(void) {
                 editarAluno(idEditar);   
                 break;
             case 4: mostrarTodos();
-                printf("\n====================================\n"); // Coloquei o texto "Lista de Todos os Alunos" no topo: Linha 70
+                printf("\n====================================\n"); 
                 break;
             case 5: verEstatisticas();
                 printf("\n====================================\n");
