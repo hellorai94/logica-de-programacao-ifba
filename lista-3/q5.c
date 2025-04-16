@@ -12,7 +12,7 @@ int main(void) {
     scanf("%d", &nota);
 
     while (nota > 10 || nota < 0) {
-        printf("Digite uma nota entre 0 - 10: \n");
+        printf("Errado. Digite uma nota entre 0 - 10: \n");
         scanf("%d", &nota);
     }
 }

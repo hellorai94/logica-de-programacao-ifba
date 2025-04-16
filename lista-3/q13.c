@@ -15,6 +15,7 @@ int main(void) {
       num = num / 2;
       i++;
     }
+    
     printf("Binário:\n ");
     for (int r = i - 1; r >= 0; r --){
         printf("%d", binario[r]);
